@@ -1,5 +1,5 @@
 import React from 'react';
-import { styles } from '../styles/CadastoELoginStyles';
+import { styles } from '../styles/AutenticacaoStyles';
 import { 
   View, 
   Text ,
