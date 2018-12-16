@@ -3,19 +3,19 @@ import {
 } from 'react-native';
 
 const styles = StyleSheet.create({
-    loginView: {
+    autenticacaoView: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
       padding: 30
     },
-    loginInput: {
+    autenticacaoInput: {
       height: 45,
       alignSelf: 'stretch',
       backgroundColor: '#EEE',
       marginBottom: 20
     },
-    loginButton: {
+    autenticacaoButton: {
       height: 45,
       alignSelf: 'stretch',
       justifyContent: 'center',
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#069',
       marginBottom: 10
     },
-    loginTextButton: {
+    autenticacaoTextButton: {
       fontWeight: 'bold',
       color: '#FFF'
     }

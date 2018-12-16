@@ -10,7 +10,7 @@ import {
 export default class Cadastrocreen extends React.Component {
 
   static navigationOptions = {
-    title: 'Login',
+    title: 'Cadastro',
   };
 
   constructor() {
@@ -23,25 +23,21 @@ export default class Cadastrocreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.loginView}>
+      <View style={styles.autenticacaoView}>
         <TextInput placeholder="Digite o seu e-mail"
           autoCapitalize='none'
           keyboardType='email-address'
           value={this.state.email}
           onChangeText={email => this.setState({ email })}
-          style={styles.loginInput} />
+          style={styles.autenticacaoInput} />
         <TextInput placeholder="Digite a sua senha"
           value={this.state.senha}
           secureTextEntry
           onChangeText={senha => this.setState({ senha })}
-          style={styles.loginInput} />
+          style={styles.autenticacaoInput} />
         <TouchableOpacity
-          style={styles.loginButton}>
-          <Text style={styles.loginTextButton}>Entrar</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.loginButton}>
-          <Text style={styles.loginTextButton}>Cadastrar-se</Text>
+          style={styles.autenticacaoButton}>
+          <Text style={styles.autenticacaoTextButton}>Cadastrar</Text>
         </TouchableOpacity>
       </View>
     );
