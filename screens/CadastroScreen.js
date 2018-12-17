@@ -1,8 +1,8 @@
 import React from 'react';
 import { styles } from '../styles/AutenticacaoStyles';
-import { 
-  View, 
-  Text ,
+import {
+  View,
+  Text,
   TextInput,
   TouchableOpacity,
   Alert
@@ -26,12 +26,12 @@ export default class Cadastrocreen extends React.Component {
   novoUsuario = async () => {
     const { email, senha } = this.state;
     try {
-        await firebase.auth().createUserWithEmailAndPassword(email, senha);
-      //  Alert.alert("Aviso", "Usuário criado com sucesso");
+      await firebase.auth().createUserWithEmailAndPassword(email, senha);
+      this.props.navigation.navigate('Home');
     } catch (error) {
-        Alert.alert("Aviso", error);
+      Alert.alert("Aviso", error);
     }
-}
+  }
 
   render() {
     return (
@@ -48,7 +48,7 @@ export default class Cadastrocreen extends React.Component {
           onChangeText={senha => this.setState({ senha })}
           style={styles.autenticacaoInput} />
         <TouchableOpacity
-        onPress={this.novoUsuario}
+          onPress={this.novoUsuario}
           style={styles.autenticacaoButton}>
           <Text style={styles.autenticacaoTextButton}>Cadastrar</Text>
         </TouchableOpacity>
