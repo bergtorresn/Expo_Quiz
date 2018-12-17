@@ -4,8 +4,10 @@ import {
   View, 
   Text ,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert
 } from 'react-native';
+import firebase from 'firebase';
 
 export default class Cadastrocreen extends React.Component {
 
@@ -20,6 +22,16 @@ export default class Cadastrocreen extends React.Component {
       senha: ""
     }
   }
+
+  novoUsuario = async () => {
+    const { email, senha } = this.state;
+    try {
+        await firebase.auth().createUserWithEmailAndPassword(email, senha);
+      //  Alert.alert("Aviso", "Usuário criado com sucesso");
+    } catch (error) {
+        Alert.alert("Aviso", error);
+    }
+}
 
   render() {
     return (
@@ -36,6 +48,7 @@ export default class Cadastrocreen extends React.Component {
           onChangeText={senha => this.setState({ senha })}
           style={styles.autenticacaoInput} />
         <TouchableOpacity
+        onPress={this.novoUsuario}
           style={styles.autenticacaoButton}>
           <Text style={styles.autenticacaoTextButton}>Cadastrar</Text>
         </TouchableOpacity>
