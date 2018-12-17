@@ -3,7 +3,8 @@ import {
   StyleSheet,
   Text,
   View,
-  FlatList
+  FlatList,
+  TouchableOpacity
 } from 'react-native';
 import firebase from 'firebase';
 
@@ -11,34 +12,58 @@ import firebase from 'firebase';
 export default class HomeScreen extends React.Component {
 
 
-  componentDidMount() {
-    const bd = firebase.database().ref();
-
-    for (i = 1; i < 6; i++) { 
-      const bdPerguntas = bd.child('Perguntas/' + i);
-      bdPerguntas.on("value", function (snapshot) {
-        snapshot.forEach((pergunta) => {
-          let NumeroDaPergunta = pergunta.key
-          console.log("New high score: " + NumeroDaPergunta);
-        });
-      }, function (errorObject) {
-        console.log("The read failed: " + errorObject.code);
-      });
-    }        
-  }
+  // componentDidMount() {
+  //   const bd = firebase.database().ref();
+  //   var perguntasDoQuiz = [];
+  //   for (i = 1; i < 6; i++) {
+  //     const bdPerguntas = bd.child('Perguntas/' + i);
+  //     bdPerguntas.on("value", function (snapshot) {
+  //       snapshot.forEach((obj) => {
+  //         let pergunta = obj.key
+  //         console.log("The read failed: " + pergunta);
+  //         perguntasDoQuiz.push(pergunta);
+  //       });
+  //     }, function (errorObject) {
+  //       console.log("The read failed: " + errorObject.code);
+  //     });
+  //   }
+  //   console.log("The read failed: " + perguntasDoQuiz.length);
+  //   this.setState({
+  //     quiz: perguntasDoQuiz
+  //   });
+  // }
 
   constructor(props) {
     super(props);
-    this.setState({
+    this.state = {
       quiz: []
-    });
+    };
   }
 
   render() {
     return (
-      <View style={styles.container}>
-
-      </View>
+      <FlatList data={["ONDE?", "QUANDO?", "PQ?", "QUEM?", "SÉRIO?"]}
+        renderItem={({ item }) =>
+          <View>
+            <Text>{item}</Text>
+            <TouchableOpacity underlayColor='black'>
+              <Text>A</Text>
+            </TouchableOpacity>
+            <TouchableOpacity underlayColor='black'>
+              <Text>B</Text>
+            </TouchableOpacity>
+            <TouchableOpacity underlayColor='black'>
+              <Text>C</Text>
+            </TouchableOpacity>
+            <TouchableOpacity underlayColor='black'>
+              <Text>D</Text>
+            </TouchableOpacity>
+            <TouchableOpacity underlayColor='black'>
+              <Text>Enviar respostas</Text>
+            </TouchableOpacity>
+          </View>
+        }
+      />
     );
   }
 }
