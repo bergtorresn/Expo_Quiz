@@ -1,11 +1,13 @@
 import React from 'react';
 import { styles } from '../styles/AutenticacaoStyles';
-import { 
-  View, 
-  Text ,
+import {
+  View,
+  Text,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert
 } from 'react-native';
+import firebase from 'firebase';
 
 export default class LoginScreen extends React.Component {
 
@@ -18,6 +20,16 @@ export default class LoginScreen extends React.Component {
     this.state = {
       email: "",
       senha: ""
+    }
+  }
+
+  entrarNaConta = async () => {
+    const { email, senha } = this.state;
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email, senha);
+      this.props.navigation.navigate('Cadastro');
+    } catch (error) {
+      Alert.alert("Aviso", error);
     }
   }
 
@@ -36,6 +48,7 @@ export default class LoginScreen extends React.Component {
           onChangeText={senha => this.setState({ senha })}
           style={styles.autenticacaoInput} />
         <TouchableOpacity
+          onPress={this.entrarNaConta}
           style={styles.autenticacaoButton}>
           <Text style={styles.autenticacaoTextButton}>Entrar</Text>
         </TouchableOpacity>
