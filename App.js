@@ -24,7 +24,7 @@ const RootStack = createStackNavigator(
     Resultado: ResultadoScreen
   },
   {
-    initialRouteName: "Login"
+    initialRouteName: "Home"
   }
 );
 
