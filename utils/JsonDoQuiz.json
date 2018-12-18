@@ -22,7 +22,7 @@
             "opcao2": "talvez",
             "opcao3": "ouvi dizer que seja",
             "opcao4": "é sim",
-            "resposta": "é não"
+            "resposta": "não"
         },
         "4": {
             "pergunta": "um mais uns é igual a dois?",
@@ -38,7 +38,7 @@
             "opcao2": "talvez",
             "opcao3": "ouvi dizer que seja",
             "opcao4": "é sim",
-            "resposta": "é não"
+            "resposta": "não"
         }
     }
 }

@@ -3,75 +3,108 @@ import {
   Text,
   View,
   FlatList,
-  TouchableWithoutFeedback,
+  TouchableOpacity,
   Image,
-
+  Dimensions,
+  StyleSheet
 } from 'react-native';
 import firebase from 'firebase';
 
+var idDaPergunta = 1;
 export default class HomeScreen extends React.Component {
 
-  componentDidMount() {
+  getQuiz(id) {
     const bd = firebase.database().ref();
     var perguntasDoQuiz = [];
 
-    for (i = 1; i < 6; i++) {
-      const bdPerguntas = bd.child('Perguntas').child(i.toString());
-      bdPerguntas.on('value', snapshot => {
-        let novaPergunta = {
-          pergunta: '',
-          resposta: '',
-          opcao1: '',
-          opcao2: '',
-          opcao3: '',
-          opcao4: ''
-        }
-        novaPergunta = snapshot.val();
-        perguntasDoQuiz.push(novaPergunta);
-        this.setState({
-          quiz: perguntasDoQuiz
-        });
+    const bdPerguntas = bd.child('Perguntas').child(id.toString());
+    bdPerguntas.on('value', snapshot => {
+      let novaPergunta = {
+        pergunta: '',
+        resposta: '',
+        opcao1: '',
+        opcao2: '',
+        opcao3: '',
+        opcao4: ''
+      }
+      novaPergunta = snapshot.val();
+      perguntasDoQuiz.push(novaPergunta);
+      this.setState({
+        quiz: perguntasDoQuiz
       });
-    }
+    });
+  }
+
+  componentDidMount() {
+    this.getQuiz(idDaPergunta);
   }
 
   constructor(props) {
     super(props);
     this.state = {
-      quiz: []
+      quiz: [],
     };
   }
 
   render() {
     return (
-      <FlatList data={this.state.quiz}
+      <FlatList style={styles.listaFlatList}
+        numColumns='2'
+        data={this.state.quiz}
+        keyExtractor={item => item.pergunta}
         renderItem={({ item }) =>
-          <View>
-            <Image source={item.img} style={{ width: 100, height: 100 }} />
-            <Text>{item.pergunta}</Text>
-            <TouchableWithoutFeedback underlayColor='black' onPress={() => this.actionOnRow(item.opcao1, item)}>
-              <Text>A) {item.opcao1}</Text>
-            </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback underlayColor='black' onPress={() => this.actionOnRow(item.opcao2, item)}>
-              <Text>B) {item.opcao2}</Text>
-            </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback underlayColor='black' onPress={() => this.actionOnRow(item.opcao3, item)}>
-              <Text>C) {item.opcao3}</Text>
-            </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback underlayColor='black' onPress={() => this.actionOnRow(item.opcao4, item)}>
-              <Text>D) {item.opcao4}</Text>
-            </TouchableWithoutFeedback>
+          <View style={styles.perguntaItemView}>
+            <Text style={styles.perguntaTitulo}>{item.pergunta}</Text>
+            <TouchableOpacity style={styles.perguntaButton} onPress={() => this.respostaSelecionada(item.opcao1, item)}>
+              <Text style={styles.perguntaOpcao}>A) {item.opcao1}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.perguntaButton} onPress={() => this.respostaSelecionada(item.opcao2, item)}>
+              <Text style={styles.perguntaOpcao}>B) {item.opcao2}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.perguntaButton} onPress={() => this.respostaSelecionada(item.opcao3, item)}>
+              <Text style={styles.perguntaOpcao}>C) {item.opcao3}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.perguntaButton} onPress={() => this.respostaSelecionada(item.opcao4, item)}>
+              <Text style={styles.perguntaOpcao}>D) {item.opcao4}</Text>
+            </TouchableOpacity>
           </View>
         }
       />
     );
   }
 
-  actionOnRow(opcaoSelecionada, item) {
-    if (opcaoSelecionada === item.resposta) {
-      console.log('acertou');
+  respostaSelecionada(opcaoSelecionada, item) {
+    if (idDaPergunta < 5) {
+      idDaPergunta++;
+      this.getQuiz(idDaPergunta);
     } else {
-      console.log('errou');
+      console.log("Tela de ranking");
     }
   }
 }
+
+const styles = StyleSheet.create({
+  listaFlatList: {
+    flex: 1,
+  },
+  perguntaItemView: {
+    flex: 1,
+    margin: 10
+  },
+  perguntaButton: {
+    flex: 1,
+    height: 50,
+    backgroundColor: 'red',
+    margin: 10,
+  },
+  perguntaOpcao: {
+    marginTop: 15,
+    fontWeight: 'bold'
+  },
+  perguntaTitulo: {
+    margin: 10,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 18
+  }
+});
