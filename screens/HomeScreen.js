@@ -10,7 +10,9 @@ import {
 } from 'react-native';
 import firebase from 'firebase';
 
+const larguraDaTela = Dimensions.get('screen').width;
 var idDaPergunta = 1;
+
 export default class HomeScreen extends React.Component {
 
   getQuiz(id) {
@@ -21,6 +23,7 @@ export default class HomeScreen extends React.Component {
     bdPerguntas.on('value', snapshot => {
       let novaPergunta = {
         pergunta: '',
+        imagem: '',
         resposta: '',
         opcao1: '',
         opcao2: '',
@@ -54,6 +57,7 @@ export default class HomeScreen extends React.Component {
         keyExtractor={item => item.pergunta}
         renderItem={({ item }) =>
           <View style={styles.perguntaItemView}>
+            <Image style={styles.perguntaImagem} source={{ uri: item.imagem }} />
             <Text style={styles.perguntaTitulo}>{item.pergunta}</Text>
             <TouchableOpacity style={styles.perguntaButton} onPress={() => this.respostaSelecionada(item.opcao1, item)}>
               <Text style={styles.perguntaOpcao}>A) {item.opcao1}</Text>
@@ -106,5 +110,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 18
-  }
+  },
+  perguntaImagem: {
+    width: larguraDaTela - 20,
+    height: larguraDaTela / 2
+    }
 });

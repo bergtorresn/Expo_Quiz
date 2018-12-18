@@ -1,12 +1,13 @@
 {
     "Perguntas": {
         "1": {
-            "pergunta": "um mais um é igual a dois?",
-            "opcao1": "não",
-            "opcao2": "talvez",
-            "opcao3": "ouvi dizer que seja",
-            "opcao4": "é sim",
-            "resposta": "é sim"
+            "pergunta": "Qual foi o primeiro pokémon do Ash?",
+            "imagem": "https://firebasestorage.googleapis.com/v0/b/quiz-52d07.appspot.com/o/pokemons.jpg?alt=media&token=6a609c5e-70d1-42c4-b643-6d4a9255aa43",
+            "opcao1": "Charmander",
+            "opcao2": "Bulbassauro",
+            "opcao3": "Pikachu",
+            "opcao4": "Squirtle",
+            "resposta": "Pikachu"
         },
         "2": {
             "pergunta": "um mais dois é igual a três?",
