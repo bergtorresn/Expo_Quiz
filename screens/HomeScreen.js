@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 50,
     backgroundColor: 'red',
-    margin: 10,
+    margin: 5,
   },
   perguntaOpcao: {
     marginTop: 15,

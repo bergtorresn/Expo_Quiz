@@ -10,36 +10,40 @@
             "resposta": "Pikachu"
         },
         "2": {
-            "pergunta": "um mais dois é igual a três?",
-            "opcao1": "não",
-            "opcao2": "talvez",
-            "opcao3": "ouvi dizer que seja",
-            "opcao4": "é sim",
-            "resposta": "é sim"
+            "pergunta": "Quem foi o primeiro rival do Ash?",
+            "imagem": "https://firebasestorage.googleapis.com/v0/b/quiz-52d07.appspot.com/o/gary.jpg?alt=media&token=26bdab90-cf37-4e31-87ac-9cf096cfd1e4",
+            "opcao1": "Gary",
+            "opcao2": "Misty",
+            "opcao3": "James",
+            "opcao4": "Brock",
+            "resposta": "Gary"
         },
         "3": {
-            "pergunta": "um e um é igual a dois?",
-            "opcao1": "não",
-            "opcao2": "talvez",
-            "opcao3": "ouvi dizer que seja",
-            "opcao4": "é sim",
-            "resposta": "não"
+            "pergunta": "Quem é o líder da equipe Rocket?",
+            "imagem": "https://firebasestorage.googleapis.com/v0/b/quiz-52d07.appspot.com/o/giovanni.jpg?alt=media&token=c847ad59-9f87-4280-b54f-188841ef8db4",
+            "opcao1": "Thunder",
+            "opcao2": "Oak",
+            "opcao3": "Gaya",
+            "opcao4": "Giovanni",
+            "resposta": "Giovanni"
         },
         "4": {
-            "pergunta": "um mais uns é igual a dois?",
-            "opcao1": "não",
-            "opcao2": "talvez",
-            "opcao3": "ouvi dizer que seja",
-            "opcao4": "é sim",
-            "resposta": "talvez"
+            "pergunta": "Qual é o nome delas?",
+            "imagem": "https://firebasestorage.googleapis.com/v0/b/quiz-52d07.appspot.com/o/jeenyejoy.png?alt=media&token=62cf5caf-6afa-41a5-9d36-c79a61229f73",
+            "opcao1": "Jenny e Jay",
+            "opcao2": "Jacky e Jay",
+            "opcao3": "Jim e Jenny",
+            "opcao4": "Jenny e Joy",
+            "resposta": "Jenny e Joy"
         },
         "5": {
-            "pergunta": "um mais dois é igual a dois?",
-            "opcao1": "não",
-            "opcao2": "talvez",
-            "opcao3": "ouvi dizer que seja",
-            "opcao4": "é sim",
-            "resposta": "não"
+            "pergunta": "No anime, quantas vezes o Ash morre?",
+            "imagem": "https://firebasestorage.googleapis.com/v0/b/quiz-52d07.appspot.com/o/ash.jpg?alt=media&token=993043de-ba57-45ed-a87a-41968e72c935",
+            "opcao1": "0",
+            "opcao2": "Nenhuma",
+            "opcao3": "2",
+            "opcao4": "1",
+            "resposta": "1"
         }
     }
 }
