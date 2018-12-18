@@ -98,11 +98,15 @@ const styles = StyleSheet.create({
   perguntaButton: {
     flex: 1,
     height: 50,
-    backgroundColor: 'red',
+    borderColor: 'red', 
+    borderRadius: 4,
+    borderWidth: 1,
+    backgroundColor: 'white',
     margin: 5,
   },
   perguntaOpcao: {
     marginTop: 15,
+    marginLeft: 5,
     fontWeight: 'bold'
   },
   perguntaTitulo: {
