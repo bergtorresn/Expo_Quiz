@@ -1,0 +1,44 @@
+{
+    "Perguntas": {
+        "1": {
+            "pergunta": "um mais um é igual a dois?",
+            "opcao1": "não",
+            "opcao2": "talvez",
+            "opcao3": "ouvi dizer que seja",
+            "opcao4": "é sim",
+            "resposta": "é sim"
+        },
+        "2": {
+            "pergunta": "um mais dois é igual a três?",
+            "opcao1": "não",
+            "opcao2": "talvez",
+            "opcao3": "ouvi dizer que seja",
+            "opcao4": "é sim",
+            "resposta": "é sim"
+        },
+        "3": {
+            "pergunta": "um e um é igual a dois?",
+            "opcao1": "não",
+            "opcao2": "talvez",
+            "opcao3": "ouvi dizer que seja",
+            "opcao4": "é sim",
+            "resposta": "é não"
+        },
+        "4": {
+            "pergunta": "um mais uns é igual a dois?",
+            "opcao1": "não",
+            "opcao2": "talvez",
+            "opcao3": "ouvi dizer que seja",
+            "opcao4": "é sim",
+            "resposta": "talvez"
+        },
+        "5": {
+            "pergunta": "um mais dois é igual a dois?",
+            "opcao1": "não",
+            "opcao2": "talvez",
+            "opcao3": "ouvi dizer que seja",
+            "opcao4": "é sim",
+            "resposta": "é não"
+        }
+    }
+}

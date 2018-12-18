@@ -1,37 +1,38 @@
 import React from 'react';
 import {
-  StyleSheet,
   Text,
   View,
   FlatList,
-  TouchableOpacity
+  TouchableOpacity,
+  Image
 } from 'react-native';
 import firebase from 'firebase';
 
-
 export default class HomeScreen extends React.Component {
 
-
-  // componentDidMount() {
-  //   const bd = firebase.database().ref();
-  //   var perguntasDoQuiz = [];
-  //   for (i = 1; i < 6; i++) {
-  //     const bdPerguntas = bd.child('Perguntas/' + i);
-  //     bdPerguntas.on("value", function (snapshot) {
-  //       snapshot.forEach((obj) => {
-  //         let pergunta = obj.key
-  //         console.log("The read failed: " + pergunta);
-  //         perguntasDoQuiz.push(pergunta);
-  //       });
-  //     }, function (errorObject) {
-  //       console.log("The read failed: " + errorObject.code);
-  //     });
-  //   }
-  //   console.log("The read failed: " + perguntasDoQuiz.length);
-  //   this.setState({
-  //     quiz: perguntasDoQuiz
-  //   });
-  // }
+  componentDidMount() {
+    const bd = firebase.database().ref();
+    var perguntasDoQuiz = [];
+    
+    for (i = 1; i < 6; i++) {
+      const bdPerguntas = bd.child('Perguntas').child(i.toString());
+      bdPerguntas.on('value', snapshot => {
+        let novaPergunta = {
+          pergunta: '',
+          resposta: '',
+          opcao1: '',
+          opcao2: '',
+          opcao3: '',
+          opcao4: ''
+        }
+        novaPergunta = snapshot.val();
+        perguntasDoQuiz.push(novaPergunta);
+        this.setState({
+          quiz: perguntasDoQuiz
+        });
+      });
+    }
+  }
 
   constructor(props) {
     super(props);
@@ -42,24 +43,22 @@ export default class HomeScreen extends React.Component {
 
   render() {
     return (
-      <FlatList data={["ONDE?", "QUANDO?", "PQ?", "QUEM?", "SÉRIO?"]}
+      <FlatList data={this.state.quiz}
         renderItem={({ item }) =>
           <View>
-            <Text>{item}</Text>
+            <Image source={item.img} style={{ width: 100, height: 100 }} />
+            <Text>{item.pergunta}</Text>
             <TouchableOpacity underlayColor='black'>
-              <Text>A</Text>
+              <Text>A) {item.opcao1}</Text>
             </TouchableOpacity>
             <TouchableOpacity underlayColor='black'>
-              <Text>B</Text>
+              <Text>B) {item.opcao2}</Text>
             </TouchableOpacity>
             <TouchableOpacity underlayColor='black'>
-              <Text>C</Text>
+              <Text>C) {item.opcao3}</Text>
             </TouchableOpacity>
             <TouchableOpacity underlayColor='black'>
-              <Text>D</Text>
-            </TouchableOpacity>
-            <TouchableOpacity underlayColor='black'>
-              <Text>Enviar respostas</Text>
+              <Text>D) {item.opcao4}</Text>
             </TouchableOpacity>
           </View>
         }
@@ -67,12 +66,3 @@ export default class HomeScreen extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
