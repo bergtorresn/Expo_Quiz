@@ -8,7 +8,7 @@ import {
 // Screens
 import LoginScreen from './screens/LoginScreen'
 import CadastroScreen from './screens/CadastroScreen'
-import HomeScreen from './screens/HomeScreen'
+import QuizScreen from './screens/QuizScreen'
 import LaunchScreen from './screens/LaunchScreen'
 import ResultadoScreen from './screens/ResultadoScreen'
 import RankingScreen from './screens/RankingScreen'
@@ -21,7 +21,7 @@ const RootStack = createStackNavigator(
     Launch: LaunchScreen,
     Login: LoginScreen,
     Cadastro: CadastroScreen,
-    Home: HomeScreen,
+    Home: QuizScreen,
     Resultado: ResultadoScreen,
     Ranking: RankingScreen
   },

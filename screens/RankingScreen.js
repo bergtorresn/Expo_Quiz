@@ -11,7 +11,7 @@ export default class RankingScreen extends React.Component {
 
     static navigationOptions = {
         title: 'Ranking',
-      };
+    };
 
     componentDidMount() {
         this.getRanking();
@@ -33,6 +33,7 @@ export default class RankingScreen extends React.Component {
                 renderItem={({ item }) =>
                     <View>
                         <Text style={stylesRanking.rankingEmail}>{item.email}</Text>
+                        <Text style={stylesRanking.rankingEmail}>{item.data}</Text>
                         <Text style={stylesRanking.rankingRespostas}>1º R: {item.resultado[0]}</Text>
                         <Text style={stylesRanking.rankingRespostas}>2º R: {item.resultado[1]}</Text>
                         <Text style={stylesRanking.rankingRespostas}>3º R: {item.resultado[2]}</Text>
@@ -58,8 +59,11 @@ export default class RankingScreen extends React.Component {
                 resposta = childSnapshot.val();
                 respostasDoQuiz.push(resposta);
             });
+            var ordenarPorAcertos = respostasDoQuiz.sort(function (a, b) {
+                return a.qtdAcertos < b.qtdAcertos;
+            });
             this.setState({
-                respostas: respostasDoQuiz
+                respostas: ordenarPorAcertos
             });
         });
     }

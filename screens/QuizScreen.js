@@ -10,9 +10,11 @@ import firebase from 'firebase';
 import { stylesQuiz } from '../styles/ListaStyles';
 
 var idDaPergunta = 1;
+var qtdAcertos = 0;
+var qtdErros = 0;
 var respostasDoJogador = [];
 
-export default class HomeScreen extends React.Component {
+export default class QuizScreen extends React.Component {
 
   static navigationOptions = {
     title: 'Quiz',
@@ -83,8 +85,10 @@ export default class HomeScreen extends React.Component {
     if (idDaPergunta < 5) {
       if (opcaoSelecionada === item.resposta) {
         respostasDoJogador.push("Acertou - " + opcaoSelecionada);
+        qtdAcertos++;
       } else { 
         respostasDoJogador.push("Errou - " + opcaoSelecionada);
+        qtdErros++;
       }
 
       idDaPergunta++;
@@ -92,17 +96,24 @@ export default class HomeScreen extends React.Component {
     } else {
       if (opcaoSelecionada === item.resposta) {
         respostasDoJogador.push("Acertou - " + opcaoSelecionada);
+        qtdAcertos++;
       } else {
         respostasDoJogador.push("Errou - " + opcaoSelecionada);
+        qtdErros++;
       }
 
       const usuario = firebase.auth().currentUser;
-      var data = new Date();
+      var d = new Date();
+      var dataDaJogada = d.toLocaleDateString("pt-BR");
+
       firebase.database().ref().child('Respostas').child(usuario.uid).set({
         email: usuario.email,
         resultado: respostasDoJogador,
-        data: data
+        data: dataDaJogada,
+        qtdAcertos: qtdAcertos,
+        qtdErros: qtdErros
       });
+      
       this.props.navigation.navigate('Resultado');
     }
   }
