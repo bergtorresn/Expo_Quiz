@@ -11,6 +11,7 @@ import CadastroScreen from './screens/CadastroScreen'
 import HomeScreen from './screens/HomeScreen'
 import LaunchScreen from './screens/LaunchScreen'
 import ResultadoScreen from './screens/ResultadoScreen'
+import RankingScreen from './screens/RankingScreen'
 // Firebase
 import ApiKeys from './utils/ApiKeys'
 import firebase from 'firebase';
@@ -21,10 +22,11 @@ const RootStack = createStackNavigator(
     Login: LoginScreen,
     Cadastro: CadastroScreen,
     Home: HomeScreen,
-    Resultado: ResultadoScreen
+    Resultado: ResultadoScreen,
+    Ranking: RankingScreen
   },
   {
-    initialRouteName: "Home"
+    initialRouteName: "Ranking"
   }
 );
 

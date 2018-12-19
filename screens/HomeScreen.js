@@ -16,29 +16,6 @@ var respostasDoJogador = [];
 
 export default class HomeScreen extends React.Component {
 
-  getQuiz(id) {
-    const bd = firebase.database().ref();
-    var perguntasDoQuiz = [];
-
-    const bdPerguntas = bd.child('Perguntas').child(id.toString());
-    bdPerguntas.on('value', snapshot => {
-      let novaPergunta = {
-        pergunta: '',
-        imagem: '',
-        resposta: '',
-        opcao1: '',
-        opcao2: '',
-        opcao3: '',
-        opcao4: ''
-      }
-      novaPergunta = snapshot.val();
-      perguntasDoQuiz.push(novaPergunta);
-      this.setState({
-        quiz: perguntasDoQuiz
-      });
-    });
-  }
-
   componentDidMount() {
     this.getQuiz(idDaPergunta);
   }
@@ -46,7 +23,7 @@ export default class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      quiz: [],
+      quiz: []
     };
   }
 
@@ -78,6 +55,28 @@ export default class HomeScreen extends React.Component {
     );
   }
 
+  getQuiz(id) {
+    var perguntasDoQuiz = [];
+
+    const bdPerguntas = firebase.database().ref().child('Perguntas').child(id.toString());
+    bdPerguntas.on('value', snapshot => {
+      let novaPergunta = {
+        pergunta: '',
+        imagem: '',
+        resposta: '',
+        opcao1: '',
+        opcao2: '',
+        opcao3: '',
+        opcao4: ''
+      }
+      novaPergunta = snapshot.val();
+      perguntasDoQuiz.push(novaPergunta);
+      this.setState({
+        quiz: perguntasDoQuiz
+      });
+    });
+  }
+
   respostaSelecionada(opcaoSelecionada, item) {
     if (idDaPergunta < 5) {
       if (opcaoSelecionada === item.resposta) {
@@ -85,11 +84,9 @@ export default class HomeScreen extends React.Component {
       } else {
         respostasDoJogador.push(false);
       }
-      //console.log(respostasDoJogador);
 
       idDaPergunta++;
       this.getQuiz(idDaPergunta);
-      console.log("quiz número: " + idDaPergunta);
     } else {
       if (opcaoSelecionada === item.resposta) {
         respostasDoJogador.push(true);
@@ -97,15 +94,14 @@ export default class HomeScreen extends React.Component {
         respostasDoJogador.push(false);
       }
 
-      const bd = firebase.database().ref();
       const usuario = firebase.auth().currentUser;
       var data = new Date();
-      bd.child('Respostas').child(usuario.uid).set({
+      firebase.database().ref().child('Respostas').child(usuario.uid).set({
         email: usuario.email,
         resultado: respostasDoJogador,
         data: data
       });
-      console.log("Tela de ranking");
+      this.props.navigation.navigate('Ranking');
     }
   }
 }
