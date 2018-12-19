@@ -4,13 +4,11 @@ import {
   View,
   FlatList,
   TouchableOpacity,
-  Image,
-  Dimensions,
-  StyleSheet
+  Image
 } from 'react-native';
 import firebase from 'firebase';
+import { stylesQuiz } from '../styles/ListaStyles';
 
-const larguraDaTela = Dimensions.get('screen').width;
 var idDaPergunta = 1;
 var respostasDoJogador = [];
 
@@ -29,25 +27,25 @@ export default class HomeScreen extends React.Component {
 
   render() {
     return (
-      <FlatList style={styles.listaFlatList}
+      <FlatList style={stylesQuiz.quizLista}
         numColumns='2'
         data={this.state.quiz}
         keyExtractor={item => item.pergunta}
         renderItem={({ item }) =>
-          <View style={styles.perguntaItemView}>
-            <Image style={styles.perguntaImagem} source={{ uri: item.imagem }} />
-            <Text style={styles.perguntaTitulo}>{item.pergunta}</Text>
-            <TouchableOpacity style={styles.perguntaButton} onPress={() => this.respostaSelecionada(item.opcao1, item)}>
-              <Text style={styles.perguntaOpcao}>A) {item.opcao1}</Text>
+          <View style={stylesQuiz.quizPerguntaView}>
+            <Image style={stylesQuiz.quizPerguntaImg} source={{ uri: item.imagem }} />
+            <Text style={stylesQuiz.quizPerguntaTitulo}>{item.pergunta}</Text>
+            <TouchableOpacity style={stylesQuiz.quizPerguntaBotao} onPress={() => this.respostaSelecionada(item.opcao1, item)}>
+              <Text style={stylesQuiz.quizPerguntaOpcao}>A) {item.opcao1}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.perguntaButton} onPress={() => this.respostaSelecionada(item.opcao2, item)}>
-              <Text style={styles.perguntaOpcao}>B) {item.opcao2}</Text>
+            <TouchableOpacity style={stylesQuiz.quizPerguntaBotao} onPress={() => this.respostaSelecionada(item.opcao2, item)}>
+              <Text style={stylesQuiz.quizPerguntaOpcao}>B) {item.opcao2}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.perguntaButton} onPress={() => this.respostaSelecionada(item.opcao3, item)}>
-              <Text style={styles.perguntaOpcao}>C) {item.opcao3}</Text>
+            <TouchableOpacity style={stylesQuiz.quizPerguntaBotao} onPress={() => this.respostaSelecionada(item.opcao3, item)}>
+              <Text style={stylesQuiz.quizPerguntaOpcao}>C) {item.opcao3}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.perguntaButton} onPress={() => this.respostaSelecionada(item.opcao4, item)}>
-              <Text style={styles.perguntaOpcao}>D) {item.opcao4}</Text>
+            <TouchableOpacity style={stylesQuiz.quizPerguntaBotao} onPress={() => this.respostaSelecionada(item.opcao4, item)}>
+              <Text style={stylesQuiz.quizPerguntaOpcao}>D) {item.opcao4}</Text>
             </TouchableOpacity>
           </View>
         }
@@ -105,37 +103,3 @@ export default class HomeScreen extends React.Component {
     }
   }
 }
-
-const styles = StyleSheet.create({
-  listaFlatList: {
-    flex: 1,
-  },
-  perguntaItemView: {
-    flex: 1,
-    margin: 10
-  },
-  perguntaButton: {
-    flex: 1,
-    height: 50,
-    borderColor: 'red',
-    borderRadius: 4,
-    borderWidth: 1,
-    backgroundColor: 'white',
-    margin: 5,
-  },
-  perguntaOpcao: {
-    marginTop: 15,
-    marginLeft: 5,
-    fontWeight: 'bold'
-  },
-  perguntaTitulo: {
-    margin: 10,
-    textAlign: 'center',
-    fontWeight: 'bold',
-    fontSize: 18
-  },
-  perguntaImagem: {
-    width: larguraDaTela - 20,
-    height: larguraDaTela / 2
-  }
-});
