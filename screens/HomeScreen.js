@@ -12,6 +12,7 @@ import firebase from 'firebase';
 
 const larguraDaTela = Dimensions.get('screen').width;
 var idDaPergunta = 1;
+var respostasDoJogador = [];
 
 export default class HomeScreen extends React.Component {
 
@@ -79,9 +80,31 @@ export default class HomeScreen extends React.Component {
 
   respostaSelecionada(opcaoSelecionada, item) {
     if (idDaPergunta < 5) {
+      if (opcaoSelecionada === item.resposta) {
+        respostasDoJogador.push(true);
+      } else {
+        respostasDoJogador.push(false);
+      }
+      //console.log(respostasDoJogador);
+
       idDaPergunta++;
       this.getQuiz(idDaPergunta);
+      console.log("quiz número: " + idDaPergunta);
     } else {
+      if (opcaoSelecionada === item.resposta) {
+        respostasDoJogador.push(true);
+      } else {
+        respostasDoJogador.push(false);
+      }
+
+      const bd = firebase.database().ref();
+      const usuario = firebase.auth().currentUser;
+      var data = new Date();
+      bd.child('Respostas').child(usuario.uid).set({
+        email: usuario.email,
+        resultado: respostasDoJogador,
+        data: data
+      });
       console.log("Tela de ranking");
     }
   }
@@ -98,7 +121,7 @@ const styles = StyleSheet.create({
   perguntaButton: {
     flex: 1,
     height: 50,
-    borderColor: 'red', 
+    borderColor: 'red',
     borderRadius: 4,
     borderWidth: 1,
     backgroundColor: 'white',
@@ -118,5 +141,5 @@ const styles = StyleSheet.create({
   perguntaImagem: {
     width: larguraDaTela - 20,
     height: larguraDaTela / 2
-    }
+  }
 });
