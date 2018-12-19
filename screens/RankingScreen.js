@@ -22,11 +22,16 @@ export default class RankingScreen extends React.Component {
     render() {
         return (
             <FlatList
-                data={this.state.respostasDoQuiz}
+                data={this.state.respostas}
+                keyExtractor={item => item.email}
                 renderItem={({ item }) =>
                     <View>
-                        <Text>{item.email}</Text>
-                        <Text>{item.resultado}</Text>
+                        <Text>Usuário: {item.email}</Text>
+                        <Text>1º Pergunta: {item.resultado[0]}</Text>
+                        <Text>2º Pergunta: {item.resultado[1]}</Text>
+                        <Text>3º Pergunta: {item.resultado[2]}</Text>
+                        <Text>4º Pergunta: {item.resultado[3]}</Text>
+                        <Text>5º Pergunta: {item.resultado[4]}</Text>
                     </View>
                 }
             />
@@ -42,7 +47,7 @@ export default class RankingScreen extends React.Component {
             snapshot.forEach(function (childSnapshot) {
                 let resposta = {
                     email: '',
-                    resultado: ''
+                    resultado: []
                 }
                 resposta = childSnapshot.val();
                 respostasDoQuiz.push(resposta);

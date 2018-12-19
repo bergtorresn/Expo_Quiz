@@ -80,18 +80,18 @@ export default class HomeScreen extends React.Component {
   respostaSelecionada(opcaoSelecionada, item) {
     if (idDaPergunta < 5) {
       if (opcaoSelecionada === item.resposta) {
-        respostasDoJogador.push(true);
-      } else {
-        respostasDoJogador.push(false);
+        respostasDoJogador.push("Acertou - " + opcaoSelecionada);
+      } else { 
+        respostasDoJogador.push("Errou - " + opcaoSelecionada);
       }
 
       idDaPergunta++;
       this.getQuiz(idDaPergunta);
     } else {
       if (opcaoSelecionada === item.resposta) {
-        respostasDoJogador.push(true);
+        respostasDoJogador.push("Acertou - " + opcaoSelecionada);
       } else {
-        respostasDoJogador.push(false);
+        respostasDoJogador.push("Errou - " + opcaoSelecionada);
       }
 
       const usuario = firebase.auth().currentUser;
@@ -101,7 +101,7 @@ export default class HomeScreen extends React.Component {
         resultado: respostasDoJogador,
         data: data
       });
-      this.props.navigation.navigate('Ranking');
+      this.props.navigation.navigate('Resultado');
     }
   }
 }

@@ -1,15 +1,28 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableHighlight
+} from 'react-native';
 
 export default class ResultadoScreen extends React.Component {
+
+  constructor(){
+    super();
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text>Resultado</Text>
+        <TouchableHighlight onPress={this.props.navigation.navigate('Ranking')}>
+          <Text>Ranking</Text>
+        </TouchableHighlight>
       </View>
     );
-  }
+    }
 }
+
 
 const styles = StyleSheet.create({
   container: {
