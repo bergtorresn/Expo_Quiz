@@ -8,6 +8,10 @@ import {
 
 export default class ResultadoScreen extends React.Component {
 
+  static navigationOptions = {
+    title: 'Resultado',
+  };
+
   constructor(){
     super();
   }

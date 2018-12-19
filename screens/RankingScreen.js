@@ -9,6 +9,10 @@ import { stylesRanking } from '../styles/ListaStyles';
 
 export default class RankingScreen extends React.Component {
 
+    static navigationOptions = {
+        title: 'Ranking',
+      };
+
     componentDidMount() {
         this.getRanking();
     }

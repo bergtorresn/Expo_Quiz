@@ -14,6 +14,10 @@ var respostasDoJogador = [];
 
 export default class HomeScreen extends React.Component {
 
+  static navigationOptions = {
+    title: 'Quiz',
+  };
+
   componentDidMount() {
     this.getQuiz(idDaPergunta);
   }
