@@ -32,13 +32,18 @@ export default class RankingScreen extends React.Component {
                 keyExtractor={item => item.email}
                 renderItem={({ item }) =>
                     <View>
-                        <Text style={stylesRanking.rankingEmail}>{item.email}</Text>
-                        <Text style={stylesRanking.rankingEmail}>{item.data}</Text>
-                        <Text style={stylesRanking.rankingRespostas}>1º R: {item.resultado[0]}</Text>
-                        <Text style={stylesRanking.rankingRespostas}>2º R: {item.resultado[1]}</Text>
-                        <Text style={stylesRanking.rankingRespostas}>3º R: {item.resultado[2]}</Text>
-                        <Text style={stylesRanking.rankingRespostas}>4º R: {item.resultado[3]}</Text>
-                        <Text style={stylesRanking.rankingRespostas}>5º R: {item.resultado[4]}</Text>
+                        <Text style={stylesRanking.rankingJogador}>Jogador: {item.email}</Text>
+                        <Text style={stylesRanking.rankingData}>Jogou em: {item.data}</Text>
+                        <Text style={stylesRanking.rankingRespostas}>Qtd de acertos: {item.qtdAcertos}</Text>
+                        <Text style={stylesRanking.rankingRespostas}>Qtd de erros: {item.qtdErros}</Text>
+                        <Text style={stylesRanking.rankingRespostas}>Respostas: </Text>
+                        <Text style={stylesRanking.rankingRespostas}>       ⋅ 1º R: {item.resultado[0]}</Text>
+                        <Text style={stylesRanking.rankingRespostas}>       ⋅ 2º R: {item.resultado[1]}</Text>
+                        <Text style={stylesRanking.rankingRespostas}>       ⋅ 3º R: {item.resultado[2]}</Text>
+                        <Text style={stylesRanking.rankingRespostas}>       ⋅ 4º R: {item.resultado[3]}</Text>
+                        <Text style={stylesRanking.rankingRespostas}>       ⋅ 5º R: {item.resultado[4]}</Text>
+                        <View style={{ height: 1, backgroundColor: "#CED0CE", marginTop: 10}}
+                        />
                     </View>
                 }
             />

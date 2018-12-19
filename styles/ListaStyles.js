@@ -14,9 +14,16 @@ const stylesRanking = StyleSheet.create({
         marginTop: 3,
         fontSize: 14
     },
-    rankingEmail: {
+    rankingJogador: {
         marginLeft: 10,
         marginTop: 10,
+        fontSize: 14,
+        fontWeight: 'bold',
+    },
+    rankingData: {
+        marginLeft: 10,
+        marginTop: 3,
+        marginBottom: 10,
         fontSize: 14,
         fontWeight: 'bold',
     }
