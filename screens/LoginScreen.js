@@ -15,6 +15,11 @@ export default class LoginScreen extends React.Component {
     title: 'Login',
   };
 
+  componentDidMount() {
+    var user = firebase.auth().currentUser;
+    console.log(user);
+  }
+
   constructor() {
     super();
     this.state = {
@@ -24,12 +29,15 @@ export default class LoginScreen extends React.Component {
   }
 
   entrarNaConta = async () => {
-    const { email, senha } = this.state;
     try {
+      const { email, senha } = this.state;
+
       await firebase.auth().signInWithEmailAndPassword(email, senha);
-      this.props.navigation.navigate('Home');
+
+      this.props.navigation.replace('Quiz');
+
     } catch (error) {
-      Alert.alert("Aviso", error);
+      Alert.alert("Aviso", error.message);
     }
   }
 
@@ -44,6 +52,7 @@ export default class LoginScreen extends React.Component {
           style={styles.autenticacaoInput} />
         <TextInput placeholder="Digite a sua senha"
           value={this.state.senha}
+          autoCapitalize='none'
           secureTextEntry
           onChangeText={senha => this.setState({ senha })}
           style={styles.autenticacaoInput} />
@@ -53,7 +62,7 @@ export default class LoginScreen extends React.Component {
           <Text style={styles.autenticacaoTextButton}>Entrar</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => this.props.navigation.navigate('Cadastro')}
+          onPress={() => this.props.navigation.push('Cadastro')}
           style={styles.autenticacaoButton}>
           <Text style={styles.autenticacaoTextButton}>Cadastrar-se</Text>
         </TouchableOpacity>

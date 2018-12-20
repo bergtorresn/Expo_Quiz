@@ -21,12 +21,12 @@ const RootStack = createStackNavigator(
     Launch: LaunchScreen,
     Login: LoginScreen,
     Cadastro: CadastroScreen,
-    Home: QuizScreen,
+    Quiz: QuizScreen,
     Resultado: ResultadoScreen,
     Ranking: RankingScreen
   },
   {
-    initialRouteName: "Ranking"
+    initialRouteName: "Login"
   }
 );
 

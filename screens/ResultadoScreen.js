@@ -19,7 +19,7 @@ export default class ResultadoScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableHighlight onPress={this.props.navigation.navigate('Ranking')}>
+        <TouchableHighlight onPress={this.props.navigation.replace('Ranking')}>
           <Text>Ranking</Text>
         </TouchableHighlight>
       </View>

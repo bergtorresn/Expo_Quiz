@@ -108,13 +108,14 @@ export default class QuizScreen extends React.Component {
 
       firebase.database().ref().child('Respostas').child(usuario.uid).set({
         email: usuario.email,
+        apelido: usuario.displayName,
         resultado: respostasDoJogador,
         data: dataDaJogada,
         qtdAcertos: qtdAcertos,
         qtdErros: qtdErros
       });
       
-      this.props.navigation.navigate('Resultado');
+      this.props.navigation.replace('Resultado');
     }
   }
 }

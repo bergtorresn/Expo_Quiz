@@ -18,24 +18,38 @@ export default class Cadastrocreen extends React.Component {
   constructor() {
     super();
     this.state = {
+      apelido: "",
       email: "",
       senha: ""
     }
   }
 
   novoUsuario = async () => {
-    const { email, senha } = this.state;
     try {
+      const { apelido, email, senha } = this.state;
+
       await firebase.auth().createUserWithEmailAndPassword(email, senha);
-      this.props.navigation.navigate('Home');
+
+      let usuario = firebase.auth().currentUser;
+
+      await usuario.updateProfile({
+        displayName: apelido
+      });
+
+      this.props.navigation.navigate('Quiz');
+
     } catch (error) {
-      Alert.alert("Aviso", error);
+      Alert.alert("Aviso", error.message);
     }
   }
 
   render() {
     return (
       <View style={styles.autenticacaoView}>
+        <TextInput placeholder="Digite o seu apelido"
+          value={this.state.apelido}
+          onChangeText={apelido => this.setState({ apelido })}
+          style={styles.autenticacaoInput} />
         <TextInput placeholder="Digite o seu e-mail"
           autoCapitalize='none'
           keyboardType='email-address'
@@ -45,6 +59,7 @@ export default class Cadastrocreen extends React.Component {
         <TextInput placeholder="Digite a sua senha"
           value={this.state.senha}
           secureTextEntry
+          autoCapitalize='none'
           onChangeText={senha => this.setState({ senha })}
           style={styles.autenticacaoInput} />
         <TouchableOpacity
