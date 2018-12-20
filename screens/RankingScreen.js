@@ -57,12 +57,7 @@ export default class RankingScreen extends React.Component {
         bdRanking.on('value', snapshot => {
 
             snapshot.forEach(function (childSnapshot) {
-                let resposta = {
-                    apelido: '',
-                    email: '',
-                    resultado: []
-                }
-                resposta = childSnapshot.val();
+                let resposta = childSnapshot.val();
                 respostasDoQuiz.push(resposta);
             });
             var ordenarPorAcertos = respostasDoQuiz.sort(function (a, b) {

@@ -124,7 +124,7 @@ export default class QuizScreen extends React.Component {
         qtdErros: qtdErros
       });
 
-      this.props.navigation.push('Resultado');
+      this.props.navigation.replace('Resultado');
     }
   }
 }
