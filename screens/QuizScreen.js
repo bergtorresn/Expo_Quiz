@@ -4,6 +4,7 @@ import {
   View,
   FlatList,
   TouchableOpacity,
+  Button,
   Image
 } from 'react-native';
 import firebase from 'firebase';
@@ -16,8 +17,16 @@ var respostasDoJogador = [];
 
 export default class QuizScreen extends React.Component {
 
-  static navigationOptions = {
-    title: 'Quiz',
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerTitle: "Mestre Pokémon",
+      headerRight: (
+        <Button
+          onPress={() => navigation.push('Ranking')}
+          title="Ranking"
+        />
+      ),
+    };
   };
 
   componentDidMount() {
@@ -86,7 +95,7 @@ export default class QuizScreen extends React.Component {
       if (opcaoSelecionada === item.resposta) {
         respostasDoJogador.push("Acertou - " + opcaoSelecionada);
         qtdAcertos++;
-      } else { 
+      } else {
         respostasDoJogador.push("Errou - " + opcaoSelecionada);
         qtdErros++;
       }
@@ -114,8 +123,8 @@ export default class QuizScreen extends React.Component {
         qtdAcertos: qtdAcertos,
         qtdErros: qtdErros
       });
-      
-      this.props.navigation.replace('Resultado');
+
+      this.props.navigation.push('Resultado');
     }
   }
 }
