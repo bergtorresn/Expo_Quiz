@@ -5,7 +5,8 @@ import {
   FlatList,
   TouchableOpacity,
   Button,
-  Image
+  Image,
+  Alert
 } from 'react-native';
 import firebase from 'firebase';
 import { stylesQuiz } from '../styles/ListaStyles';

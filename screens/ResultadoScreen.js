@@ -3,7 +3,8 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableHighlight
+  TouchableHighlight,
+  Alert
 } from 'react-native';
 import firebase from 'firebase';
 

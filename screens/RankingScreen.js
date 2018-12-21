@@ -3,7 +3,8 @@ import {
     Text,
     View,
     FlatList,
-    Button
+    Button,
+    Alert
 } from 'react-native';
 import firebase from 'firebase';
 import { stylesRanking } from '../styles/ListaStyles';
