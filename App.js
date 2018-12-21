@@ -26,7 +26,7 @@ const RootStack = createStackNavigator(
     Ranking: RankingScreen
   },
   {
-    initialRouteName: "Login"
+    initialRouteName: "Resultado"
   }
 );
 
