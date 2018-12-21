@@ -50,22 +50,27 @@ export default class RankingScreen extends React.Component {
         );
     }
 
-    getRanking() {
-        var respostasDoQuiz = [];
+    getRanking = async () => {
+        try {
+            var respostasDoQuiz = [];
 
-        const bdRanking = firebase.database().ref().child('Respostas');
-        bdRanking.on('value', snapshot => {
+            await firebase.database().ref().child('Respostas').on('value', snapshot => {
+                snapshot.forEach(function (childSnapshot) {
+                    let resposta = childSnapshot.val();
+                    respostasDoQuiz.push(resposta);
+                });
+                
+                var ordenarPorAcertos = respostasDoQuiz.sort(function (a, b) {
+                    return a.qtdAcertos < b.qtdAcertos;
+                });
 
-            snapshot.forEach(function (childSnapshot) {
-                let resposta = childSnapshot.val();
-                respostasDoQuiz.push(resposta);
+                this.setState({
+                    respostas: ordenarPorAcertos
+                });
             });
-            var ordenarPorAcertos = respostasDoQuiz.sort(function (a, b) {
-                return a.qtdAcertos < b.qtdAcertos;
-            });
-            this.setState({
-                respostas: ordenarPorAcertos
-            });
-        });
+
+        } catch (error) {
+            Alert.alert("Aviso", error.message);
+        }
     }
 }

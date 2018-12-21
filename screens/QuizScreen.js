@@ -30,7 +30,7 @@ export default class QuizScreen extends React.Component {
   };
 
   componentDidMount() {
-    this.getQuiz(idDaPergunta);
+    this.getPerguntaDoQuizPorId(idDaPergunta);
   }
 
   constructor(props) {
@@ -68,27 +68,23 @@ export default class QuizScreen extends React.Component {
     );
   }
 
-  getQuiz(id) {
-    var perguntasDoQuiz = [];
+  getPerguntaDoQuizPorId = async (id) => {
+    try {
+      var perguntasDoQuiz = [];
 
-    const bdPerguntas = firebase.database().ref().child('Perguntas').child(id.toString());
-    bdPerguntas.on('value', snapshot => {
-      let novaPergunta = {
-        pergunta: '',
-        imagem: '',
-        resposta: '',
-        opcao1: '',
-        opcao2: '',
-        opcao3: '',
-        opcao4: ''
-      }
-      novaPergunta = snapshot.val();
-      perguntasDoQuiz.push(novaPergunta);
-      this.setState({
-        quiz: perguntasDoQuiz
+      await firebase.database().ref().child('Perguntas').child(id.toString()).on('value', snapshot => {
+        let novaPergunta = snapshot.val();
+        perguntasDoQuiz.push(novaPergunta);
+        this.setState({
+          quiz: perguntasDoQuiz
+        });
       });
-    });
+
+    } catch (error) {
+      Alert.alert("Aviso", error.message);
+    }
   }
+
 
   respostaSelecionada(opcaoSelecionada, item) {
     if (idDaPergunta < 5) {
@@ -99,9 +95,8 @@ export default class QuizScreen extends React.Component {
         respostasDoJogador.push("Errou - " + opcaoSelecionada);
         qtdErros++;
       }
-
       idDaPergunta++;
-      this.getQuiz(idDaPergunta);
+      this.getPerguntaDoQuizPorId(idDaPergunta);
     } else {
       if (opcaoSelecionada === item.resposta) {
         respostasDoJogador.push("Acertou - " + opcaoSelecionada);
@@ -110,12 +105,17 @@ export default class QuizScreen extends React.Component {
         respostasDoJogador.push("Errou - " + opcaoSelecionada);
         qtdErros++;
       }
+      this.enviarResultadoDoUsuario();
+    }
+  }
 
+  enviarResultadoDoUsuario = async () => {
+    try {
       const usuario = firebase.auth().currentUser;
-      var d = new Date();
-      var dataDaJogada = d.toLocaleDateString("pt-BR");
+      let data = new Date();
+      let dataDaJogada = data.toLocaleDateString("pt-BR");
 
-      firebase.database().ref().child('Respostas').child(usuario.uid).set({
+      await firebase.database().ref().child('Respostas').child(usuario.uid).set({
         email: usuario.email,
         apelido: usuario.displayName,
         resultado: respostasDoJogador,
@@ -125,6 +125,9 @@ export default class QuizScreen extends React.Component {
       });
 
       this.props.navigation.replace('Resultado');
+
+    } catch (error) {
+      Alert.alert("Aviso", error.message);
     }
   }
 }

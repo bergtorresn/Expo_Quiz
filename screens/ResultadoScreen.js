@@ -14,7 +14,7 @@ export default class ResultadoScreen extends React.Component {
   };
 
   componentDidMount() {
-    this.getRanking();
+    this.getResultado();
   }
 
   constructor() {
@@ -24,7 +24,7 @@ export default class ResultadoScreen extends React.Component {
     }
   }
 
-  getRanking = async () => {
+  getResultado = async () => {
     try {
       const usuario = firebase.auth().currentUser;
 
