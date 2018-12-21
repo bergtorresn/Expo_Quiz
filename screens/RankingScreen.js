@@ -2,15 +2,24 @@ import React from 'react';
 import {
     Text,
     View,
-    FlatList
+    FlatList,
+    Button
 } from 'react-native';
 import firebase from 'firebase';
 import { stylesRanking } from '../styles/ListaStyles';
 
 export default class RankingScreen extends React.Component {
 
-    static navigationOptions = {
-        title: 'Ranking',
+    static navigationOptions = ({ navigation }) => {
+        return {
+            headerTitle: "Ranking",
+            headerRight: (
+                <Button
+                    onPress={() => navigation.navigation('Quiz')}
+                    title="Jogar"
+                />
+            ),
+        };
     };
 
     componentDidMount() {
@@ -59,7 +68,7 @@ export default class RankingScreen extends React.Component {
                     let resposta = childSnapshot.val();
                     respostasDoQuiz.push(resposta);
                 });
-                
+
                 var ordenarPorAcertos = respostasDoQuiz.sort(function (a, b) {
                     return a.qtdAcertos < b.qtdAcertos;
                 });
