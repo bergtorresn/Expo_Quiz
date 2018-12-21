@@ -24,16 +24,20 @@ export default class ResultadoScreen extends React.Component {
     }
   }
 
-  getRanking() {
-    let usuario = firebase.auth().currentUser;
+  getRanking = async () => {
+    try {
+      const usuario = firebase.auth().currentUser;
 
-    const bdRanking = firebase.database().ref().child('Respostas').child(usuario.uid);
-    bdRanking.on('value', snapshot => {
-      let respostas = snapshot.val();
-      this.setState({
-        respostas: respostas
+      await firebase.database().ref().child('Respostas').child(usuario.uid).on('value', snapshot => {
+        let respostas = snapshot.val();
+        this.setState({
+          respostas: respostas
+        });
       });
-    });
+
+    } catch (error) {
+      Alert.alert("Aviso", error.message);
+    }
   }
 
   render() {
@@ -43,7 +47,6 @@ export default class ResultadoScreen extends React.Component {
         <Text>Jogou em: {this.state.respostas.data}</Text>
         <Text>Qtd de acertos: {this.state.respostas.qtdAcertos}</Text>
         <Text>Qtd de erros: {this.state.respostas.qtdErros}</Text>
-        <Text>Respostas: </Text>
         <TouchableHighlight onPress={() => this.props.navigation.push('Ranking')}>
           <Text>{this.state.respostas.apelido}</Text>
         </TouchableHighlight>
