@@ -8,6 +8,12 @@ import {
 } from 'react-native';
 import firebase from 'firebase';
 import { stylesRanking } from '../styles/ListaStyles';
+import { StackActions, NavigationActions } from 'react-navigation';
+
+const resetAction = StackActions.reset({
+    index: 0,
+    actions: [NavigationActions.navigate({ routeName: 'Quiz' })],
+});
 
 export default class RankingScreen extends React.Component {
 
@@ -16,7 +22,7 @@ export default class RankingScreen extends React.Component {
             headerTitle: "Ranking",
             headerRight: (
                 <Button
-                    onPress={() => navigation.navigation('Quiz')}
+                    onPress={() => navigation.dispatch(resetAction)}
                     title="Jogar"
                 />
             ),

@@ -9,7 +9,6 @@ import {
 import LoginScreen from './screens/LoginScreen'
 import CadastroScreen from './screens/CadastroScreen'
 import QuizScreen from './screens/QuizScreen'
-import LaunchScreen from './screens/LaunchScreen'
 import ResultadoScreen from './screens/ResultadoScreen'
 import RankingScreen from './screens/RankingScreen'
 // Firebase
@@ -18,7 +17,6 @@ import firebase from 'firebase';
 
 const RootStack = createStackNavigator(
   {
-    Launch: LaunchScreen,
     Login: LoginScreen,
     Cadastro: CadastroScreen,
     Quiz: QuizScreen,
@@ -26,7 +24,7 @@ const RootStack = createStackNavigator(
     Ranking: RankingScreen
   },
   {
-    initialRouteName: "Resultado"
+    initialRouteName: "Login"
   }
 );
 

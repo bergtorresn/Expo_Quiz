@@ -8,6 +8,12 @@ import {
   Alert
 } from 'react-native';
 import firebase from 'firebase';
+import { StackActions, NavigationActions } from 'react-navigation';
+
+const resetAction = StackActions.reset({
+  index: 0,
+  actions: [NavigationActions.navigate({ routeName: 'Quiz' })],
+});
 
 export default class LoginScreen extends React.Component {
 
@@ -34,7 +40,7 @@ export default class LoginScreen extends React.Component {
 
       await firebase.auth().signInWithEmailAndPassword(email, senha);
 
-      this.props.navigation.replace('Quiz');
+      this.props.navigation.dispatch(resetAction);
 
     } catch (error) {
       Alert.alert("Aviso", error.message);

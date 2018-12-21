@@ -8,6 +8,12 @@ import {
   Alert
 } from 'react-native';
 import firebase from 'firebase';
+import { StackActions, NavigationActions } from 'react-navigation';
+
+const resetAction = StackActions.reset({
+  index: 0,
+  actions: [NavigationActions.navigate({ routeName: 'Quiz' })],
+});
 
 export default class Cadastrocreen extends React.Component {
 
@@ -36,7 +42,7 @@ export default class Cadastrocreen extends React.Component {
         displayName: apelido
       });
 
-      this.props.navigation.navigate('Quiz');
+      this.props.navigation.dispatch(resetAction);
 
     } catch (error) {
       Alert.alert("Aviso", error.message);

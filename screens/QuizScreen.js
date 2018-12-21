@@ -10,6 +10,12 @@ import {
 } from 'react-native';
 import firebase from 'firebase';
 import { stylesQuiz } from '../styles/ListaStyles';
+import { StackActions, NavigationActions } from 'react-navigation';
+
+const resetAction = StackActions.reset({
+  index: 0,
+  actions: [NavigationActions.navigate({ routeName: 'Resultado' })],
+});
 
 var idDaPergunta = 1;
 var qtdAcertos = 0;
@@ -20,13 +26,7 @@ export default class QuizScreen extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: "Mestre Pokémon",
-      headerRight: (
-        <Button
-          onPress={() => navigation.push('Ranking')}
-          title="Ranking"
-        />
-      ),
+      headerTitle: "Mestre Pokémon"
     };
   };
 
@@ -125,7 +125,7 @@ export default class QuizScreen extends React.Component {
         qtdErros: qtdErros
       });
 
-      this.props.navigation.replace('Resultado');
+      this.props.navigation.dispatch(resetAction);
 
     } catch (error) {
       Alert.alert("Aviso", error.message);
