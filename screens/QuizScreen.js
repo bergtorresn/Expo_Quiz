@@ -17,10 +17,10 @@ const resetAction = StackActions.reset({
   actions: [NavigationActions.navigate({ routeName: 'Resultado' })],
 });
 
-var idDaPergunta = 1;
-var qtdAcertos = 0;
-var qtdErros = 0;
-var respostasDoJogador = [];
+var idDaPergunta;
+var qtdAcertos;
+var qtdErros;
+var respostasDoJogador;
 
 export default class QuizScreen extends React.Component {
 
@@ -31,6 +31,7 @@ export default class QuizScreen extends React.Component {
   };
 
   componentDidMount() {
+    console.log(idDaPergunta);
     this.getPerguntaDoQuizPorId(idDaPergunta);
   }
 
@@ -39,6 +40,10 @@ export default class QuizScreen extends React.Component {
     this.state = {
       quiz: []
     };
+     idDaPergunta = 1;
+     qtdAcertos = 0;
+     qtdErros = 0;
+     respostasDoJogador = [];
   }
 
   render() {
