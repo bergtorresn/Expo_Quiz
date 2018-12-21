@@ -48,7 +48,7 @@ export default class ResultadoScreen extends React.Component {
         <Text>Qtd de acertos: {this.state.respostas.qtdAcertos}</Text>
         <Text>Qtd de erros: {this.state.respostas.qtdErros}</Text>
         <TouchableHighlight onPress={() => this.props.navigation.push('Ranking')}>
-          <Text>{this.state.respostas.apelido}</Text>
+          <Text>Ver Ranking</Text>
         </TouchableHighlight>
       </View>
     );
