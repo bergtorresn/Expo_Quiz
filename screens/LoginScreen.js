@@ -21,11 +21,6 @@ export default class LoginScreen extends React.Component {
     title: 'Login',
   };
 
-  componentDidMount() {
-    var user = firebase.auth().currentUser;
-    console.log(user);
-  }
-
   constructor() {
     super();
     this.state = {
